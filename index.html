@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persons Reunion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #26252526;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            display: flex;
+            flex-wrap: wrap;
+
+            margin: 20px 0px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            background-color: rgba(55, 54, 54, 0.087);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+            border:2px solid rgba(237, 230, 230, 0.736);
+            margin-right:20px;
+            transition: transform 0.3s ease-in-out;
+
+        }
+        .card:hover{
+            transform: scale(1.2);
+
+
+        }
+
+        .card img {
+            max-width: 100%;
+            height: 150px;
+
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        img {
+            width:100%;
+
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+        .register-button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            display: none;
+        }
+        #missingPersonForm{
+            display:none;
+        }
+
+        .register-button {
+  /* General styling */
+  background-color: #4CAF50; 
+  color: white;             
+  padding: 15px 32px;      
+  text-align: center;       
+  text-decoration: none;    
+  display: inline-block;    
+  font-size: 16px;          
+  border: none;             
+  border-radius: 5px;       
+  cursor: pointer;     
+  width:200px;
+  position:absolute;
+  right:50px;   
+  top:15px;  
+        }
+
+  .register-button:hover {
+    background-color: #6199d5; 
+  }
+
+  .links{
+    color:#ecf1ed;
+  }
+
+     a{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     }    
+     
+     @media screen and(max-width: 467px)and (min-width:465px){
+  body {
+    font-size: 14px; /* Adjust for smaller screens */
+  }
+  
+
+
+
+  form {
+    max-width: 400px; /* Narrow form on smaller devices */
+  }
+
+  .card {
+    margin-bottom: 15px; /* Reduce spacing */
+  }
+.register-button{ 
+    width:100px;
+    right:5px;   
+  top:1px;
+}
+     }
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2 class="heading">Persons Reunion</h2>
+    
+
+        <button class="register-button" onclick="toggleForm()"><i class="fa-sharp fa-solid fa-pen"></i>  Fill Details</button>
+
+    </header>
+    <form id="missingPersonForm" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="number">Phone No:</label>
+        <input type="tel" id="number" name="number" required>
+    
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+    
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+    
+        <label for="photo">Upload Photo:</label>
+        <input type="file" id="photo" name="photo" accept="image/*" required>
+    
+        <button type="button" onclick="submitForm()"><i class="fa-solid fa-thumbs-up"></i> Submit</button>
+    </form>
+
+   
+
+    <div id="result"></div>
+
+    <footer>
+        <p>Creator's <i class="fa-brands fa-linkedin"> : <a class="links"href="https://www.linkedin.com/in/pabbu-bharath-35b2691aa/">Pabbu Bharath</a></i> </p>
+    </footer>
+
+    <script>
+         function toggleForm() {
+            var form = document.getElementById('missingPersonForm');
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+        }
+     
+        var storedData = [
+{
+"name": "bharath",
+"number":7995480543,
+"date": "2024-01-15",
+
+"address": "dwarka",
+"photo": "WhatsApp Image 2024-01-17 at 10.33.21 AM.jpeg",
+
+},
+{
+    "name": "rohit",
+    "number":7995480543,
+
+"date": "2024-01-15",
+
+"address": "dwarka",
+"photo": "WhatsApp Image 2024-01-17 at 10.33.21 AM.jpeg",
+
+},
+]
+; // In-memory storage for form data
+displayResult(storedData);
+
+
+        function submitForm() {
+            var name = document.getElementById('name').value;
+            var number = document.getElementById('number').value;
+
+            var date = document.getElementById('date').value;
+            var address = document.getElementById('address').value;
+            var photo = document.getElementById('photo').value; // Note: For security reasons, you shouldn't actually access the file path directly
+
+            // Simulate storing data in-memory
+            if(!name || !photo)
+            alert("Please enter name and upload photo")
+
+         
+        
+        else{
+            storedData.push({ name, number,date, address, photo });
+
+        }
+        displayResult(storedData);
+
+
+    }
+
+        
+        function displayResult(data) {
+            var resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = '';
+
+            data.forEach(person => {
+                var cardDiv = document.createElement('div');
+                cardDiv.className = 'card';
+
+                var cardImage = document.createElement('img');
+                cardImage.src = person.photo;
+                cardImage.alt = person.name;
+                
+                var cardContent = document.createElement('div');
+                cardContent.className = 'card-content';
+                cardContent.innerHTML = `
+                    <p><strong>Name:</strong> ${person.name}</p>
+                    <p><strong>Name:</strong> ${person.number}</p>
+
+                    <p><strong>Address:</strong> ${person.address}</p>
+                    <p><strong>Date:</strong> ${person.date}</p>
+
+                `;
+
+                cardDiv.appendChild(cardImage);
+                cardDiv.appendChild(cardContent);
+                resultContainer.appendChild(cardDiv);
+
+                document.getElementById('name').value=null;
+                document.getElementById('number').value=null;
+                document.getElementById('address').value=null;
+                document.getElementById('date').value=null;
+                document.getElementById('photo').value=null;
+
+
+
+
+
+            });
+        }
+    
+    </script>
+
+</body>
+</html>
